@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Greg's List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center border border-dark text-white bg-primary">Cars</h1>
+    <div class="row justify-content-center py-3">
+
+      <form onsubmit="app.controllers.carController.addCar(event)">
+        <label for="make">Make</label>
+        <input type="text" name="make" required>
+        <label for="model">Model</label>
+        <input type="text" name="model" required>
+        <label for="year">Year</label>
+        <input type="number" name="year" required>
+        <label for="color">Color</label>
+        <input type="text" name="color" required>
+        <button type="submit" class="btn btn-outline-primary btn-block btn-lg">Add Car</button>
+      </form>
+    </div>
+    <div id="cars" class="row"></div>
+  </div>
+  <div class="container">
+    <h1 class="text-center border border-dark bg-info text-white">Jobs</h1>
+    <div class="row justify-content-center py-3">
+      <form onsubmit="app.controllers.jobController.addJobs(event)">
+        <label for="title">Title</label>
+        <input type="text" name="title" required>
+        <label for="company">Company</label>
+        <input type="text" name="company" required>
+        <label for="salary">Salary</label>
+        <input type="text" name="salary" required>
+        <label for="industry">Industry</label>
+        <input type="text" name="industry" required>
+        <button type="submit" class="btn btn-outline-info btn-block btn-lg">Add Job</button>
+      </form>
+    </div>
+    <div id="jobs" class="row"></div>
+  </div>
+  <div class="container">
+    <h1 class="text-center border border-dark text-white bg-success">Houses</h1>
+    <div class="row justify-content-center py-3">
+      <form onsubmit="app.controllers.houseController.addHouses(event)">
+        <label for="bedrooms">Bedrooms</label>
+        <input type="number" name="bedrooms" required>
+        <label for="sqFeet">Square Feet</label>
+        <input type="number" name="sqFeet" required>
+        <label for="type" placeholder="House, Apartment, Condo, etc.">Type</label>
+        <input type="text" name="type" required>
+        <label for="color">Color</label>
+        <input type="text" name="color" required>
+        <label for="location">Location</label>
+        <input type="text" name="location" required>
+        <button type="submit" class="btn btn-outline-success btn-block btn-lg">Add House</button>
+      </form>
+    </div>
+    <div id="houses" class="row"></div>
+  </div>
+
+
+
+  <script src="app/main.js" type="module"></script>
+</body>
+
+</html>
