@@ -1,22 +1,37 @@
 import Car from "../models/car.js";
 
+let _state = {
+  cars: []
+}
 
-let _cars = [
-  new Car({ make: "Chevy", model: "Trailblazer", year: 2002, color: "red" }),
-  new Car({ make: "Lexus", model: "RX 350", year: 1999, color: "black" })
-]
+_state.cars.push(new Car({ make: "Chevy", model: "Trailblazer", year: 2002, color: "red" }))
+_state.cars.push(new Car({ make: "Lexus", model: "RX 350", year: 1999, color: "black" }))
 
+let _subscribers = {
+  cars: []
+}
+
+function setState(propName, data) {
+  _state[propName] = data
+  _subscribers[propName].forEach(fn => fn());
+}
 
 export default class CarService {
   constructor() {
-    console.log("car service works", _cars)
+    console.log("car service works", this.Cars)
+  }
+
+  addSubscriber(propName, fn) {
+    _subscribers[propName].push(fn)
   }
 
   get Cars() {
-    return _cars.map(car => new Car(car))
+    return _state.cars.map(car => new Car(car))
   }
 
   addCar(newCar) {
-    _cars.push(new Car(newCar))
+    let temp = this.Cars
+    temp.push(new Car(newCar))
+    setState("cars", temp)
   }
 }

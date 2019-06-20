@@ -2,7 +2,6 @@ import JobService from "./JobService.js";
 
 
 
-
 let _jobService = new JobService()
 
 function drawJobs() {
@@ -18,6 +17,7 @@ function drawJobs() {
 export default class JobController {
   constructor() {
     console.log("job controller works")
+    _jobService.addSubscriber("jobs", drawJobs)
     drawJobs()
   }
 

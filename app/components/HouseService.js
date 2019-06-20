@@ -1,21 +1,37 @@
 import House from "../models/house.js";
 
-let _house = [
-  new House({ type: "Apartment", bedrooms: 2, sqFeet: 820, color: "beige", location: "Boise" }),
-  new House({ type: "House", bedrooms: 4, sqFeet: 2800, color: "brown", location: "Eagle" })
-]
+let _state = {
+  houses: []
+}
 
+_state.houses.push(new House({ bedrooms: 2, sqFeet: 820, type: "Apartment", color: "beige", location: "Boise" }))
+_state.houses.push(new House({ bedrooms: 4, sqFeet: 2800, type: "House", color: "brown", location: "Eagle" }))
+
+let _subscribers = {
+  houses: []
+}
+
+function setState(propName, data) {
+  _state[propName] = data
+  _subscribers[propName].forEach(fn => fn());
+}
 
 export default class HouseService {
   constructor() {
-    console.log("house service works", _house)
+    console.log("house service works", this.Houses)
   }
 
-  get House() {
-    return _house.map(house => new House(house))
+  addSubscriber(propName, fn) {
+    _subscribers[propName].push(fn)
   }
 
-  addHouses(newHouse) {
-    _house.push(new House(newHouse))
+  get Houses() {
+    return _state.houses.map(house => new House(house))
+  }
+
+  addHouse(newHouse) {
+    let temp = this.Houses
+    temp.push(new House(newHouse))
+    setState("houses", temp)
   }
 }

@@ -4,23 +4,24 @@ import HouseService from "./HouseService.js";
 
 let _houseService = new HouseService()
 
-function drawHouse() {
-  let houseElem = document.querySelector("#houses")
+function drawHouses() {
+  let housesElem = document.querySelector("#houses")
   let template = ''
-  let house = _houseService.House
-  house.forEach(house => {
+  let houses = _houseService.Houses
+  houses.forEach(house => {
     template += house.HouseTemplate
   })
-  houseElem.innerHTML = template
+  housesElem.innerHTML = template
 }
 
 export default class HouseController {
   constructor() {
     console.log("house controller works")
-    drawHouse()
+    _houseService.addSubscriber("houses", drawHouses)
+    drawHouses()
   }
 
-  addHouses(e) {
+  addHouse(e) {
     e.preventDefault()
     let form = e.target
 
@@ -32,8 +33,7 @@ export default class HouseController {
       location: form.location.value
     }
 
-    _houseService.addHouses(newHouse)
+    _houseService.addHouse(newHouse)
     form.reset()
-    drawHouse()
   }
 }
